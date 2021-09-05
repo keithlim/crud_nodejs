@@ -5,9 +5,9 @@ const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_P
 
 const pool = new Pool({
     connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
-    // ssl: {
-    //     rejectUnauthorized: false,
-    // },
+    ssl: {
+        rejectUnauthorized: false,
+    },
     connectionTimeoutMillis: 0, // how long to wait if no connections available
     idleTimeoutMillis: 100000 // how long to wait till disconnecting idle connections
 });
@@ -29,7 +29,7 @@ module.exports = {
         const start = Date.now()
         pool.query(text, params, async (err, res) => {
             const duration = Date.now() - start
-            console.log('executed query', { text, duration, rows: res.rowCount })
+            // console.log('executed query', { text, duration, rows: res.rowCount })
             callback(err, res)
         })
     }
