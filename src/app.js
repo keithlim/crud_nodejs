@@ -11,5 +11,6 @@ app.use(cors()); // for whitelisting
 
 const productRoute = require('./routes/product.routes');
 app.use('/api/', productRoute);
-
+const index = require('./routes/index');
+app.use('/api/', index);
 module.exports = app;
